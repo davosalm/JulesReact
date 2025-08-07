@@ -1,0 +1,154 @@
+/* Global Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c5b2c;
+}
+
+/* Layout */
+.game-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.sidebar > .widget + .widget {
+    margin-top: 1rem;
+}
+
+/* Widgets */
+.widget {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.widget h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.widget ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.weather-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    margin: 0;
+}
+.weather-display span:first-child {
+    font-size: 2rem;
+}
+
+/* Farm */
+.plots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.plot {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 2px dashed #8b4513;
+    background-color: #deb887;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: inherit;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+.plot:hover {
+    background-color: #cdab7d;
+}
+.plot .icon { font-size: 2rem; }
+.plot.has-pest {
+    border-color: red;
+    animation: pulse 1s infinite;
+}
+
+/* Store Modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+}
+.store-section { margin-bottom: 1.5rem; }
+.store-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+.close-btn { display: block; margin: 1rem auto 0; }
+
+/* Notification */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2d3436;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    z-index: 100;
+    animation: fadeInOut 3s forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, 20px); }
+    10% { opacity: 1; transform: translate(-50%, 0); }
+    90% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, 20px); }
+}
