@@ -4,12 +4,28 @@ import { useGameState } from './contexts/GameStateContext';
 import PlayerStats from './components/PlayerStats.jsx';
 import Inventory from './components/Inventory.jsx';
 import Farm from './components/Farm.jsx';
-import Weather from './components/Weather.jsx';
 import Store from './components/Store.jsx';
+import MainMenu from './components/MainMenu.jsx';
+import Weather from './components/Weather.jsx';
 
 function App() {
   const { gameState, actions } = useGameState();
   const [isStoreOpen, setStoreOpen] = useState(false);
+  const [gameStatus, setGameStatus] = useState('menu'); // 'menu' or 'playing'
+
+  const handleNewGame = () => {
+    actions.newGame();
+    setGameStatus('playing');
+  };
+
+  const handleLoadGame = () => {
+    actions.loadGame();
+    setGameStatus('playing');
+  };
+
+  if (gameStatus === 'menu') {
+    return <MainMenu onNewGame={handleNewGame} onLoadGame={handleLoadGame} />;
+  }
 
   return (
     <>
@@ -32,6 +48,7 @@ function App() {
             <h2>Ações</h2>
             <button onClick={actions.nextDay}>Próximo Dia</button>
             <button onClick={() => setStoreOpen(true)}>Visitar Loja</button>
+            <button onClick={actions.saveGame}>Salvar Jogo</button>
           </div>
         </div>
         <div className="main-content">
