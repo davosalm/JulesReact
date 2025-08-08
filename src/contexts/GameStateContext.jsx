@@ -192,6 +192,38 @@ export function GameStateProvider({ children }) {
         });
     }, [setNotification]);
 
+    const saveGame = useCallback(() => {
+        try {
+            localStorage.setItem('farmGameState', JSON.stringify(gameState));
+            setNotification('Jogo salvo com sucesso!');
+        } catch (error) {
+            console.error("Failed to save game", error);
+            setNotification('Erro ao salvar o jogo.');
+        }
+    }, [gameState, setNotification]);
+
+    const loadGame = useCallback(() => {
+        try {
+            const savedStateJSON = localStorage.getItem('farmGameState');
+            if (savedStateJSON) {
+                const savedState = JSON.parse(savedStateJSON);
+                setGameState(savedState);
+                setNotification('Jogo carregado com sucesso!');
+            } else {
+                setNotification('Nenhum jogo salvo encontrado.');
+            }
+        } catch (error) {
+            console.error("Failed to load game", error);
+            setNotification('Erro ao carregar o jogo.');
+        }
+    }, [setNotification]);
+
+    const newGame = useCallback(() => {
+        // Reset state to initial values
+        setGameState(initialState);
+        setNotification('Novo jogo iniciado!');
+    }, [setNotification]);
+
 
     const value = {
         gameState,
@@ -201,7 +233,10 @@ export function GameStateProvider({ children }) {
             harvest,
             buyItem,
             sellCrop,
-            usePesticide
+            usePesticide,
+            saveGame,
+            loadGame,
+            newGame
         }
     };
 
